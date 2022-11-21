@@ -157,6 +157,21 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(
                           height: 25,
                         ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 30),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text("select your travel needs",
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    color: Appcolor.grey2,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w800)),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 25,
+                        ),
                       ],
                     ),
                   ),
