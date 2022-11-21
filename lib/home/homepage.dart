@@ -119,12 +119,14 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(
                           height: 15,
                         ),
-                        const Text("PROJECT BIG A",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Appcolor.bluecolor1,
-                                fontSize: 42,
-                                fontWeight: FontWeight.w800)),
+                        const Text(
+                          "PROJECT BIG A",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Appcolor.bluecolor1,
+                              fontSize: 42,
+                              fontWeight: FontWeight.w800),
+                        ),
                         const SizedBox(
                           height: 5,
                         ),
@@ -157,20 +159,62 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(
                           height: 25,
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 30),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text("select your travel needs",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    color: Appcolor.grey2,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w800)),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              buildCardWidget(
+                                  imagelink: 'accommodations.png',
+                                  title: 'Accredited\nAccommodations',
+                                  context: context),
+                              buildCardWidget(
+                                  imagelink: 'restaurants.png',
+                                  title: 'Accredited\nRestaurants',
+                                  context: context),
+                            ],
                           ),
                         ),
                         const SizedBox(
-                          height: 25,
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              buildCardWidget(
+                                  imagelink: 'attractions.png',
+                                  title: 'Attractions\nTo See',
+                                  context: context),
+                              buildCardWidget(
+                                  imagelink: 'activities.png',
+                                  title: 'Activities\nto Experience',
+                                  context: context),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              buildCardWidget(
+                                  imagelink: 'travelagencies.png',
+                                  title: 'Accredited\nTravel Agencies',
+                                  context: context),
+                              buildCardWidget(
+                                  imagelink: 'tourguides.png',
+                                  title: 'Accredited\nTour Guides',
+                                  context: context),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 100,
                         ),
                       ],
                     ),
@@ -252,4 +296,56 @@ class _HomePageState extends State<HomePage> {
                       ))))),
     );
   }
+}
+
+Widget buildCardWidget(
+    {required String imagelink, required String title, context}) {
+  return Stack(
+    children: [
+      Container(
+        height: 200,
+        width: MediaQuery.of(context).size.width / 2 - 35,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/$imagelink'),
+                fit: BoxFit.fitHeight),
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(5)),
+      ),
+      Positioned.fill(
+        child: Container(
+          height: 200,
+          width: MediaQuery.of(context).size.width / 2 - 35,
+          decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.transparent,
+                  Colors.transparent,
+                  Colors.transparent,
+                  Appcolor.grey3,
+                ],
+              ),
+              borderRadius: BorderRadius.circular(5)),
+        ),
+      ),
+      Positioned(
+        bottom: 10,
+        left: 10,
+        right: 10,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("$title",
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                    color: Appcolor.background,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700)),
+          ],
+        ),
+      ),
+    ],
+  );
 }
