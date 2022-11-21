@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "881823305691",
+    "project_id": "project-big-a-16ca5",
+    "storage_bucket": "project-big-a-16ca5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881823305691:android:c4144942b5e60a531621fe",
+        "android_client_info": {
+          "package_name": "com.example.projectbiga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881823305691-vrj4vuj18vrg4sctf0c6hsb8tjhk6pc5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwwu5ZeqvgWuV4csXCDVgxPbRWwyI1w0I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881823305691-vrj4vuj18vrg4sctf0c6hsb8tjhk6pc5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
