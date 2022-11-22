@@ -2,11 +2,14 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:intl/intl.dart';
+import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../models/appcolor.dart';
 import '../models/datamodel.dart';
@@ -43,6 +46,7 @@ class _HomePageState extends State<HomePage> {
   var _dotPosition = 0;
   List<String> _promotionImages = [];
 
+  //fetch promotional data from firebase
   fetchPromotionImages() async {
     var _firestoreInstance = FirebaseFirestore.instance;
     QuerySnapshot qn = await _firestoreInstance.collection('promotions').get();
@@ -77,12 +81,35 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             CarouselSlider(
                                 items: _promotionImages
-                                    .map((item) => Container(
+                                    .map(
+                                      (item) => Stack(
+                                        children: [
+                                          Shimmer.fromColors(
+                                              highlightColor: Colors.white,
+                                              baseColor: Appcolor.background,
+                                              child: Container(
+                                                  height: 350,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  color: Colors.white)),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                    image: NetworkImage(item),
+                                                    fit: BoxFit.fitHeight)),
+                                          )
+                                        ],
+                                      ),
+                                      /*Container(
                                           decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                  image: NetworkImage(item),
-                                                  fit: BoxFit.fitHeight)),
-                                        ))
+                                              /*image: DecorationImage(
+                                                
+                                                  image:   NetworkImage(item),
+                                                  fit: BoxFit.fitHeight)*/),
+                                                  child:  
+                                        )*/
+                                    )
                                     .toList(),
                                 options: CarouselOptions(
                                     height: 350,
@@ -167,10 +194,12 @@ class _HomePageState extends State<HomePage> {
                               buildCardWidget(
                                   imagelink: 'accommodations.png',
                                   title: 'Accredited\nAccommodations',
+                                  iconval: LineIcons.bed,
                                   context: context),
                               buildCardWidget(
                                   imagelink: 'restaurants.png',
                                   title: 'Accredited\nRestaurants',
+                                  iconval: LineIcons.utensils,
                                   context: context),
                             ],
                           ),
@@ -186,10 +215,12 @@ class _HomePageState extends State<HomePage> {
                               buildCardWidget(
                                   imagelink: 'attractions.png',
                                   title: 'Attractions\nTo See',
+                                  iconval: LineIcons.binoculars,
                                   context: context),
                               buildCardWidget(
                                   imagelink: 'activities.png',
                                   title: 'Activities\nto Experience',
+                                  iconval: LineIcons.swimmer,
                                   context: context),
                             ],
                           ),
@@ -205,10 +236,12 @@ class _HomePageState extends State<HomePage> {
                               buildCardWidget(
                                   imagelink: 'travelagencies.png',
                                   title: 'Accredited\nTravel Agencies',
+                                  iconval: LineIcons.plane,
                                   context: context),
                               buildCardWidget(
                                   imagelink: 'tourguides.png',
                                   title: 'Accredited\nTour Guides',
+                                  iconval: LineIcons.flag,
                                   context: context),
                             ],
                           ),
@@ -299,7 +332,10 @@ class _HomePageState extends State<HomePage> {
 }
 
 Widget buildCardWidget(
-    {required String imagelink, required String title, context}) {
+    {required String imagelink,
+    required String title,
+    required IconData iconval,
+    context}) {
   return Stack(
     children: [
       Container(
@@ -308,7 +344,7 @@ Widget buildCardWidget(
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/images/$imagelink'),
-                fit: BoxFit.fitHeight),
+                fit: BoxFit.cover),
             color: Colors.black,
             borderRadius: BorderRadius.circular(5)),
       ),
@@ -343,6 +379,18 @@ Widget buildCardWidget(
                     color: Appcolor.background,
                     fontSize: 14,
                     fontWeight: FontWeight.w700)),
+          ],
+        ),
+      ),
+      Positioned(
+        top: 10,
+        right: 10,
+        child: Icon(
+          iconval,
+          color: Colors.white,
+          size: 20,
+          shadows: const <Shadow>[
+            Shadow(color: Colors.black, blurRadius: 15.0)
           ],
         ),
       ),
