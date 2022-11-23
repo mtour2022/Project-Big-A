@@ -1,20 +1,11 @@
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:intl/intl.dart';
-import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:projectbiga/widgets/topnavigationbar.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../models/appcolor.dart';
-import '../models/datamodel.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -288,8 +279,6 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                const Positioned(
-                    top: 0, left: 0, right: 0, child: TopNavigationBar()),
               ]),
             )),
       ),
