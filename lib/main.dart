@@ -1,8 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
+import 'package:projectbiga/SplashPage.dart';
+import 'package:projectbiga/mainpage.dart';
 import 'package:projectbiga/home/homepage.dart';
+import 'package:projectbiga/home/itempage.dart';
 import 'package:projectbiga/services/getdatamodel.dart';
+import 'package:projectbiga/services/itempagservice.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -19,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         //import instances from provider firebase
-        ChangeNotifierProvider(create: (_) => FetchDataService()),
+        ChangeNotifierProvider(create: (_) => ItemPageService()),
       ],
       child: OverlaySupport.global(
         child: MaterialApp(
@@ -30,7 +34,9 @@ class MyApp extends StatelessWidget {
             // home: HomePage(),
             initialRoute: '/',
             routes: {
-              '/': (context) => const HomePage(),
+              '/': (context) => SplashPage(),
+              '/mainpage': (context) => MainPage(),
+              '/accommodations': (context) => const ItemPage(),
             }),
       ),
     );

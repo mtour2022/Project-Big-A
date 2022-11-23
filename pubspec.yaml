@@ -48,6 +48,7 @@ dependencies:
   line_icons: ^2.0.1
   shimmer: ^2.0.0
   uuid: ^3.0.7
+  loading_animation_widget: ^1.2.0+3
 
 
 
