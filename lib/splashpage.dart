@@ -21,10 +21,13 @@ class SplashPage extends StatelessWidget {
       FirebaseApp app = await Firebase.initializeApp();
 
       //fetch data from firebase
-      itemService.getItemsCollectionFromFirebase().whenComplete(() {
-        Navigator.of(context).pushNamed('/mainpage');
-        /*Navigator.push(
-            context, MaterialPageRoute(builder: (context) => this.goToPage));*/
+      itemService.getAccommodationCollectionFromFirebase().whenComplete(() {
+        itemService.getRestaurantCollectionFromFirebase().whenComplete(() {
+          itemService.getAttractionCollectionFromFirebase().whenComplete(() {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                '/mainpage', (Route<dynamic> route) => false);
+          });
+        });
       });
     });
 

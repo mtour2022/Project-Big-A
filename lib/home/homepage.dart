@@ -222,11 +222,16 @@ class _HomePageState extends State<HomePage> {
                                   iconval: LineIcons.bed,
                                   context: context),
                             ),
-                            buildCardWidget(
-                                imagelink: 'restaurants.png',
-                                title: 'Accredited\nRestaurants',
-                                iconval: LineIcons.utensils,
-                                context: context),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushNamed('/restaurants');
+                              },
+                              child: buildCardWidget(
+                                  imagelink: 'restaurants.png',
+                                  title: 'Accredited\nRestaurants',
+                                  iconval: LineIcons.utensils,
+                                  context: context),
+                            ),
                           ],
                         ),
                       ),
@@ -238,11 +243,16 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            buildCardWidget(
-                                imagelink: 'attractions.png',
-                                title: 'Attractions\nTo See',
-                                iconval: LineIcons.binoculars,
-                                context: context),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushNamed('/attractions');
+                              },
+                              child: buildCardWidget(
+                                  imagelink: 'attractions.png',
+                                  title: 'Attractions\nTo See',
+                                  iconval: LineIcons.binoculars,
+                                  context: context),
+                            ),
                             buildCardWidget(
                                 imagelink: 'activities.png',
                                 title: 'Activities\nto Experience',

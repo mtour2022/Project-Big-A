@@ -2,9 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:projectbiga/SplashPage.dart';
+import 'package:projectbiga/home/attractions/items_attractions.dart';
+import 'package:projectbiga/home/restaurants/items_restaurants.dart';
 import 'package:projectbiga/mainpage.dart';
 import 'package:projectbiga/home/homepage.dart';
-import 'package:projectbiga/home/itempage.dart';
+import 'package:projectbiga/home/accommodations.dart/items_accommodations.dart';
 import 'package:projectbiga/services/getdatamodel.dart';
 import 'package:projectbiga/services/itempagservice.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +38,9 @@ class MyApp extends StatelessWidget {
             routes: {
               '/': (context) => SplashPage(),
               '/mainpage': (context) => MainPage(),
-              '/accommodations': (context) => const ItemPage(),
+              '/accommodations': (context) => const AccommodationsItemsPage(),
+              '/restaurants': (context) => const RestaurantsItemsPage(),
+              '/attractions': (context) => const AttractionsItemsPage(),
             }),
       ),
     );

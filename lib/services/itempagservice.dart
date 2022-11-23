@@ -6,18 +6,13 @@ import '../models/accommodationsmodel.dart';
 class ItemPageService extends ChangeNotifier {
   FirebaseFirestore? instance;
 
-  List<AccommodationsModel> _items = [];
+  List<AccommodationsModel> _accommodationlist = [];
 
-  List<AccommodationsModel> getItems() {
-    return _items;
+  List<AccommodationsModel> getAccommodationItems() {
+    return _accommodationlist;
   }
 
-  Future<void> getItemsCollectionFromFirebase() async {
-    /*instance = FirebaseFirestore.instance;
-    CollectionReference itemcol = instance!.collection('accommodations');
-
-    QuerySnapshot<Object?> snapshot = await itemcol.get();*/
-
+  Future<void> getAccommodationCollectionFromFirebase() async {
     var _firestoreInstance = FirebaseFirestore.instance;
     QuerySnapshot qn =
         await _firestoreInstance.collection('accommodations').get();
@@ -27,14 +22,45 @@ class ItemPageService extends ChangeNotifier {
       var getitem = itemdata as Map<String, dynamic>;
       AccommodationsModel itemaccom = AccommodationsModel.fromJson(getitem);
 
-      _items.add(itemaccom);
-      print(itemaccom.toString());
+      _accommodationlist.add(itemaccom);
     });
+  }
 
-    ;
-    /*for (int i = 0; i < qn.docs.length; i++) {
-      _items.add(qn.docs[i]['name']);
-      
-    }*/
+  List<AccommodationsModel> _restaurantlist = [];
+
+  List<AccommodationsModel> getRestaurantItems() {
+    return _restaurantlist;
+  }
+
+  Future<void> getRestaurantCollectionFromFirebase() async {
+    var _firestoreInstance = FirebaseFirestore.instance;
+    QuerySnapshot qn = await _firestoreInstance.collection('restaurants').get();
+
+    var data = qn.docs.forEach((element) {
+      var itemdata = element.data() as Map;
+      var getitem = itemdata as Map<String, dynamic>;
+      AccommodationsModel itemaccom = AccommodationsModel.fromJson(getitem);
+
+      _restaurantlist.add(itemaccom);
+    });
+  }
+
+  List<AccommodationsModel> _attractionlist = [];
+
+  List<AccommodationsModel> getAttractionItems() {
+    return _attractionlist;
+  }
+
+  Future<void> getAttractionCollectionFromFirebase() async {
+    var _firestoreInstance = FirebaseFirestore.instance;
+    QuerySnapshot qn = await _firestoreInstance.collection('attractions').get();
+
+    var data = qn.docs.forEach((element) {
+      var itemdata = element.data() as Map;
+      var getitem = itemdata as Map<String, dynamic>;
+      AccommodationsModel itemaccom = AccommodationsModel.fromJson(getitem);
+
+      _attractionlist.add(itemaccom);
+    });
   }
 }
