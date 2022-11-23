@@ -9,7 +9,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:uuid/uuid.dart';
 
-import '../models/accommodationsmodel.dart';
+import '../models/listmodel.dart';
 import '../models/appcolor.dart';
 
 class AddAccommodationsPage extends StatefulWidget {
@@ -45,7 +45,7 @@ class _AddAccommodationsPageState extends State<AddAccommodationsPage> {
     final dataReference =
         FirebaseFirestore.instance.collection('accommodations').doc('$id');
 
-    final json = AccommodationsModel(
+    final json = ListModel(
       name: name,
       description: description,
       address: address,

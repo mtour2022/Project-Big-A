@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:projectbiga/models/accommodationsmodel.dart';
+import 'package:projectbiga/models/listmodel.dart';
 
 import 'package:projectbiga/models/datamodel.dart';
 
 class FetchDataService extends ChangeNotifier {
-  late AccommodationsModel _fetcheddataaccommodation;
+  late ListModel _fetcheddataaccommodation;
 
-  AccommodationsModel get getstringdataaccommodation =>
-      _fetcheddataaccommodation;
+  ListModel get getstringdataaccommodation => _fetcheddataaccommodation;
 
   void getdata(
     String name,
@@ -21,7 +20,7 @@ class FetchDataService extends ChangeNotifier {
     String image2,
     String image3,
   ) async {
-    _fetcheddataaccommodation = AccommodationsModel(
+    _fetcheddataaccommodation = ListModel(
         name: name,
         description: description,
         address: address,
@@ -37,7 +36,7 @@ class FetchDataService extends ChangeNotifier {
   }
 
   void cleardata() async {
-    _fetcheddataaccommodation = AccommodationsModel(
+    _fetcheddataaccommodation = ListModel(
       name: "",
       description: "",
       address: "",

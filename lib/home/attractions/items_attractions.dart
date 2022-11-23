@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:projectbiga/models/accommodationsmodel.dart';
+import 'package:projectbiga/models/listmodel.dart';
 import 'package:projectbiga/services/itempagservice.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +20,7 @@ class _AttractionsItemsPageState extends State<AttractionsItemsPage> {
     ItemPageService itemdata =
         Provider.of<ItemPageService>(context, listen: false);
 
-    List<AccommodationsModel> itemlist = itemdata.getAttractionItems();
+    List<ListModel> itemlist = itemdata.getAttractionItems();
 
     return SafeArea(
       child: Scaffold(
@@ -42,35 +42,30 @@ class _AttractionsItemsPageState extends State<AttractionsItemsPage> {
                           onTap: () {},
                           //user physicalmodel to add shadow in a combined widgets
                           child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    height: 200,
-                                    width:
-                                        MediaQuery.of(context).size.width / 2 -
-                                            35,
-                                    color: Colors.white,
-                                    child: Center(
-                                      child:
-                                          LoadingAnimationWidget.bouncingBall(
-                                        color: Appcolor.bluecolor1,
-                                        // leftDotColor: const Color(0xFF1A1A3F),
-                                        //rightDotColor: const Color(0xFFEA3799),
-                                        size: 25,
-                                      ),
+                            child: Stack(
+                              children: [
+                                Container(
+                                  height: 200,
+                                  width: MediaQuery.of(context).size.width / 2 -
+                                      35,
+                                  color: Colors.white,
+                                  child: Center(
+                                    child: LoadingAnimationWidget.bouncingBall(
+                                      color: Appcolor.bluecolor1,
+                                      // leftDotColor: const Color(0xFF1A1A3F),
+                                      //rightDotColor: const Color(0xFFEA3799),
+                                      size: 25,
                                     ),
                                   ),
-                                  buildCardWidget(
-                                      title: itemlist[index].name,
-                                      imagelink: itemlist[index].image1,
-                                      classval: itemlist[index].classval,
-                                      address: itemlist[index].address,
-                                      iconval: LineIcons.utensils,
-                                      context: context),
-                                ],
-                              ),
+                                ),
+                                buildCardWidget(
+                                    title: itemlist[index].name,
+                                    imagelink: itemlist[index].image1,
+                                    classval: itemlist[index].classval,
+                                    address: itemlist[index].address,
+                                    iconval: LineIcons.binoculars,
+                                    context: context),
+                              ],
                             ),
                           ));
                     })),
