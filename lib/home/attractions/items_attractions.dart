@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:projectbiga/models/listmodel.dart';
+import 'package:projectbiga/models/largelistmodel.dart';
 import 'package:projectbiga/services/itempagservice.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +20,7 @@ class _AttractionsItemsPageState extends State<AttractionsItemsPage> {
     ItemPageService itemdata =
         Provider.of<ItemPageService>(context, listen: false);
 
-    List<ListModel> itemlist = itemdata.getAttractionItems();
+    List<LargeListModel> itemlist = itemdata.getAttractionItems();
 
     return SafeArea(
       child: Scaffold(

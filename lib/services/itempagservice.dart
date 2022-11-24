@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../models/acitivitieslist.dart';
-import '../models/listmodel.dart';
+import '../models/mediumlistmodel.dart';
+import '../models/largelistmodel.dart';
 
 class ItemPageService extends ChangeNotifier {
   FirebaseFirestore? instance;
 
-  List<ListModel> _accommodationlist = [];
+  List<LargeListModel> _accommodationlist = [];
 
-  List<ListModel> getAccommodationItems() {
+  List<LargeListModel> getAccommodationItems() {
     return _accommodationlist;
   }
 
@@ -21,15 +21,15 @@ class ItemPageService extends ChangeNotifier {
     var data = qn.docs.forEach((element) {
       var itemdata = element.data() as Map;
       var getitem = itemdata as Map<String, dynamic>;
-      ListModel itemaccom = ListModel.fromJson(getitem);
+      LargeListModel itemaccom = LargeListModel.fromJson(getitem);
 
       _accommodationlist.add(itemaccom);
     });
   }
 
-  List<ListModel> _restaurantlist = [];
+  List<LargeListModel> _restaurantlist = [];
 
-  List<ListModel> getRestaurantItems() {
+  List<LargeListModel> getRestaurantItems() {
     return _restaurantlist;
   }
 
@@ -40,15 +40,15 @@ class ItemPageService extends ChangeNotifier {
     var data = qn.docs.forEach((element) {
       var itemdata = element.data() as Map;
       var getitem = itemdata as Map<String, dynamic>;
-      ListModel itemaccom = ListModel.fromJson(getitem);
+      LargeListModel itemaccom = LargeListModel.fromJson(getitem);
 
       _restaurantlist.add(itemaccom);
     });
   }
 
-  List<ListModel> _attractionlist = [];
+  List<LargeListModel> _attractionlist = [];
 
-  List<ListModel> getAttractionItems() {
+  List<LargeListModel> getAttractionItems() {
     return _attractionlist;
   }
 
@@ -59,15 +59,15 @@ class ItemPageService extends ChangeNotifier {
     var data = qn.docs.forEach((element) {
       var itemdata = element.data() as Map;
       var getitem = itemdata as Map<String, dynamic>;
-      ListModel itemaccom = ListModel.fromJson(getitem);
+      LargeListModel itemaccom = LargeListModel.fromJson(getitem);
 
       _attractionlist.add(itemaccom);
     });
   }
 
-  List<ActivityListModel> _activitieslist = [];
+  List<MediumListModel> _activitieslist = [];
 
-  List<ActivityListModel> getActivityItems() {
+  List<MediumListModel> getActivityItems() {
     return _activitieslist;
   }
 
@@ -78,7 +78,7 @@ class ItemPageService extends ChangeNotifier {
     var data = qn.docs.forEach((element) {
       var itemdata = element.data() as Map;
       var getitem = itemdata as Map<String, dynamic>;
-      ActivityListModel itemaccom = ActivityListModel.fromJson(getitem);
+      MediumListModel itemaccom = MediumListModel.fromJson(getitem);
 
       _activitieslist.add(itemaccom);
     });

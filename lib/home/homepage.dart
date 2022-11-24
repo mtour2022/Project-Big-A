@@ -244,11 +244,16 @@ class _HomePageState extends State<HomePage> {
                                   iconval: LineIcons.binoculars,
                                   context: context),
                             ),
-                            buildCardWidget(
-                                imagelink: 'activities.png',
-                                title: 'Activities\nto Experience',
-                                iconval: LineIcons.swimmer,
-                                context: context),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushNamed('/activities');
+                              },
+                              child: buildCardWidget(
+                                  imagelink: 'activities.png',
+                                  title: 'Activities\nto Experience',
+                                  iconval: LineIcons.swimmer,
+                                  context: context),
+                            ),
                           ],
                         ),
                       ),

@@ -11,6 +11,8 @@ import 'package:projectbiga/services/getdatamodel.dart';
 import 'package:projectbiga/services/itempagservice.dart';
 import 'package:provider/provider.dart';
 
+import 'home/activities/items_activities.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -41,6 +43,7 @@ class MyApp extends StatelessWidget {
               '/accommodations': (context) => const AccommodationsItemsPage(),
               '/restaurants': (context) => const RestaurantsItemsPage(),
               '/attractions': (context) => const AttractionsItemsPage(),
+              '/activities': (context) => const ActivitiesItemsPage(),
             }),
       ),
     );
