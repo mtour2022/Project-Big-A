@@ -4,6 +4,7 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:projectbiga/SplashPage.dart';
 import 'package:projectbiga/home/attractions/items_attractions.dart';
 import 'package:projectbiga/home/restaurants/items_restaurants.dart';
+import 'package:projectbiga/home/travelagencies/items_travelagencies.dart';
 import 'package:projectbiga/mainpage.dart';
 import 'package:projectbiga/home/homepage.dart';
 import 'package:projectbiga/home/accommodations.dart/items_accommodations.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
               '/restaurants': (context) => const RestaurantsItemsPage(),
               '/attractions': (context) => const AttractionsItemsPage(),
               '/activities': (context) => const ActivitiesItemsPage(),
+              '/travelagencies': (context) => const TravelAgenciesItemsPage(),
             }),
       ),
     );

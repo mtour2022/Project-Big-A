@@ -265,11 +265,17 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            buildCardWidget(
-                                imagelink: 'travelagencies.png',
-                                title: 'Accredited\nTravel Agencies',
-                                iconval: LineIcons.plane,
-                                context: context),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context)
+                                    .pushNamed('/travelagencies');
+                              },
+                              child: buildCardWidget(
+                                  imagelink: 'travelagencies.png',
+                                  title: 'Accredited\nTravel Agencies',
+                                  iconval: LineIcons.plane,
+                                  context: context),
+                            ),
                             buildCardWidget(
                                 imagelink: 'tourguides.png',
                                 title: 'Accredited\nTour Guides',
