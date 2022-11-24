@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:projectbiga/models/mediumlistmodel.dart';
 import 'package:projectbiga/models/largelistmodel.dart';
 import 'package:projectbiga/services/itempagservice.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/appcolor.dart';
+import '../models/appcolor.dart';
+import 'detailspage.dart';
 
-class ActivitiesItemsPage extends StatefulWidget {
-  const ActivitiesItemsPage({super.key});
+class AccommodationsItemsPage extends StatefulWidget {
+  const AccommodationsItemsPage({super.key});
 
   @override
-  State<ActivitiesItemsPage> createState() => _ActivitiesItemsPageState();
+  State<AccommodationsItemsPage> createState() =>
+      _AccommodationsItemsPageState();
 }
 
-class _ActivitiesItemsPageState extends State<ActivitiesItemsPage> {
+class _AccommodationsItemsPageState extends State<AccommodationsItemsPage> {
   @override
   Widget build(BuildContext context) {
     ItemPageService itemdata =
         Provider.of<ItemPageService>(context, listen: false);
 
-    List<MediumListModel> itemlist = itemdata.getActivityItems();
+    List<LargeListModel> itemlist = itemdata.getAccommodationItems();
 
     return SafeArea(
       child: Scaffold(
@@ -40,32 +41,46 @@ class _ActivitiesItemsPageState extends State<ActivitiesItemsPage> {
                     crossAxisCount: 2,
                     children: List.generate(itemlist.length, (index) {
                       return GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LargeDetailsPage(
+                                        itemdetails: itemlist[index],
+                                      )),
+                            );
+                          },
                           //user physicalmodel to add shadow in a combined widgets
                           child: Center(
-                            child: Stack(
-                              children: [
-                                Container(
-                                  height: 200,
-                                  width: MediaQuery.of(context).size.width / 2 -
-                                      35,
-                                  color: Colors.white,
-                                  child: Center(
-                                    child: LoadingAnimationWidget.bouncingBall(
-                                      color: Appcolor.bluecolor1,
-                                      // leftDotColor: const Color(0xFF1A1A3F),
-                                      //rightDotColor: const Color(0xFFEA3799),
-                                      size: 25,
+                            child: Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    height: 200,
+                                    width:
+                                        MediaQuery.of(context).size.width / 2 -
+                                            35,
+                                    color: Colors.white,
+                                    child: Center(
+                                      child:
+                                          LoadingAnimationWidget.bouncingBall(
+                                        color: Appcolor.bluecolor1,
+                                        // leftDotColor: const Color(0xFF1A1A3F),
+                                        //rightDotColor: const Color(0xFFEA3799),
+                                        size: 25,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                buildCardWidget(
-                                    title: itemlist[index].name,
-                                    imagelink: itemlist[index].image1,
-                                    classval: itemlist[index].classval,
-                                    iconval: LineIcons.swimmer,
-                                    context: context),
-                              ],
+                                  buildCardWidget(
+                                      title: itemlist[index].name,
+                                      imagelink: itemlist[index].image1,
+                                      classval: itemlist[index].classval,
+                                      address: itemlist[index].address,
+                                      iconval: LineIcons.bed,
+                                      context: context),
+                                ],
+                              ),
                             ),
                           ));
                     })),
@@ -100,6 +115,7 @@ class _ActivitiesItemsPageState extends State<ActivitiesItemsPage> {
   Widget buildCardWidget(
       {required String imagelink,
       required String title,
+      required String address,
       required String classval,
       required IconData iconval,
       context}) {
@@ -157,6 +173,19 @@ class _ActivitiesItemsPageState extends State<ActivitiesItemsPage> {
                   style: const TextStyle(
                       color: Appcolor.background,
                       fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      shadows: <Shadow>[
+                        Shadow(
+                          offset: Offset(1, 1),
+                          blurRadius: 3.0,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                      ])),
+              Text("$address",
+                  textAlign: TextAlign.start,
+                  style: const TextStyle(
+                      color: Appcolor.background,
+                      fontSize: 10,
                       fontWeight: FontWeight.w700,
                       shadows: <Shadow>[
                         Shadow(

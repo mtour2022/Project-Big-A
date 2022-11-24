@@ -7,7 +7,7 @@ import 'package:projectbiga/models/smalllistmodel.dart';
 import 'package:projectbiga/services/itempagservice.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/appcolor.dart';
+import '../models/appcolor.dart';
 
 class TravelAgenciesItemsPage extends StatefulWidget {
   const TravelAgenciesItemsPage({super.key});

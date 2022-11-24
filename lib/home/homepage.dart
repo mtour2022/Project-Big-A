@@ -110,14 +110,6 @@ class _HomePageState extends State<HomePage> {
                                             )
                                           ],
                                         ),
-                                        /*Container(
-                                              decoration: BoxDecoration(
-                                                  /*image: DecorationImage(
-                                                    
-                                                      image:   NetworkImage(item),
-                                                      fit: BoxFit.fitHeight)*/),
-                                                      child:  
-                                            )*/
                                       )
                                       .toList(),
                                   options: CarouselOptions(

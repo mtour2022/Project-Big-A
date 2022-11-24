@@ -4,7 +4,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:projectbiga/bag/bagpage.dart';
 import 'package:projectbiga/callpage/callpage.dart';
 import 'package:projectbiga/home/homepage.dart';
-import 'package:projectbiga/home/accommodations.dart/items_accommodations.dart';
+import 'package:projectbiga/home/items_accommodations.dart';
 import 'package:projectbiga/read/readpage.dart';
 import 'package:projectbiga/services/itempagservice.dart';
 import 'package:projectbiga/widgets/topnavigationbar.dart';
