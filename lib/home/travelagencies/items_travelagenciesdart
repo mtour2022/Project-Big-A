@@ -34,7 +34,7 @@ class _TravelAgenciesItemsPageState extends State<TravelAgenciesItemsPage> {
               ),
               Expanded(
                 child:ListView.builder(
-          itemCount: 5,
+          itemCount: itemlist.length,
           itemBuilder: (BuildContext context, int index) {
             return ListTile(
                 leading: const Icon(Icons.list),
@@ -42,7 +42,7 @@ class _TravelAgenciesItemsPageState extends State<TravelAgenciesItemsPage> {
                   "GFG",
                   style: TextStyle(color: Colors.green, fontSize: 15),
                 ),
-                title: Text("List item $index"));
+                title: Text("${itemlist[index].name}"));
           }),
                 
                 /* GridView.count(
