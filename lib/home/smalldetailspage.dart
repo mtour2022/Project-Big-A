@@ -14,15 +14,15 @@ import 'package:shimmer/shimmer.dart';
 
 import '../models/appcolor.dart';
 
-class LargeDetailsPage extends StatefulWidget {
+class SmallDetailsPage extends StatefulWidget {
   LargeListModel itemdetails;
-  LargeDetailsPage({required this.itemdetails, super.key});
+  SmallDetailsPage({required this.itemdetails, super.key});
 
   @override
-  State<LargeDetailsPage> createState() => _LargeDetailsPageState();
+  State<SmallDetailsPage> createState() => _SmallDetailsPageState();
 }
 
-class _LargeDetailsPageState extends State<LargeDetailsPage> {
+class _SmallDetailsPageState extends State<SmallDetailsPage> {
   late List<String> listitem = <String>[];
   var _dotPosition = 0;
   @override

@@ -6,6 +6,7 @@ import 'package:projectbiga/services/itempagservice.dart';
 import 'package:provider/provider.dart';
 
 import '../models/appcolor.dart';
+import 'detailspage.dart';
 
 class AttractionsItemsPage extends StatefulWidget {
   const AttractionsItemsPage({super.key});
@@ -33,13 +34,21 @@ class _AttractionsItemsPageState extends State<AttractionsItemsPage> {
               ),
               Expanded(
                 child: GridView.count(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     shrinkWrap: true,
                     childAspectRatio: 0.8,
                     crossAxisCount: 2,
                     children: List.generate(itemlist.length, (index) {
                       return GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LargeDetailsPage(
+                                        itemdetails: itemlist[index],
+                                      )),
+                            );
+                          },
                           //user physicalmodel to add shadow in a combined widgets
                           child: Center(
                             child: Stack(
