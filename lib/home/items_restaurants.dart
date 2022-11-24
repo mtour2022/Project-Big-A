@@ -6,6 +6,7 @@ import 'package:projectbiga/services/itempagservice.dart';
 import 'package:provider/provider.dart';
 
 import '../models/appcolor.dart';
+import 'detailspage.dart';
 
 class RestaurantsItemsPage extends StatefulWidget {
   const RestaurantsItemsPage({super.key});
@@ -39,7 +40,15 @@ class _RestaurantsItemsPageState extends State<RestaurantsItemsPage> {
                     crossAxisCount: 2,
                     children: List.generate(itemlist.length, (index) {
                       return GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LargeDetailsPage(
+                                        itemdetails: itemlist[index],
+                                      )),
+                            );
+                          },
                           //user physicalmodel to add shadow in a combined widgets
                           child: Center(
                             child: Padding(

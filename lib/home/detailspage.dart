@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -161,13 +162,25 @@ class _LargeDetailsPageState extends State<LargeDetailsPage> {
                         const SizedBox(
                           height: 15,
                         ),
-                        Text(
-                          "${widget.itemdetails.description}",
+                        ExpandableText(
+                          widget.itemdetails.description,
+                          expandText: 'show more',
+                          collapseText: 'show less',
+                          maxLines: 4,
+                          linkColor: Appcolor.bluecolor1,
+                          textAlign: TextAlign.justify,
+                          style: const TextStyle(
+                              fontSize: 14,
+                              color: Appcolor.grey2,
+                              fontWeight: FontWeight.normal),
+                        ),
+                        /* Text(
+                          widget.itemdetails.description,
                           style: const TextStyle(
                             color: Appcolor.grey2,
                             fontSize: 14,
                           ),
-                        ),
+                        ),*/
                       ],
                     ),
                   ),
@@ -178,6 +191,69 @@ class _LargeDetailsPageState extends State<LargeDetailsPage> {
               ),
             ),
           ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 80,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 2,
+                      blurRadius: 3,
+                      offset: Offset(3, 0), // changes position of shadow
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(5)),
+              child: Container(
+                margin: const EdgeInsets.only(
+                    top: 15, bottom: 15, left: 50, right: 50),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: const LinearGradient(colors: [
+                      Appcolor.bluecolor1,
+                      Appcolor.bluecolor3,
+                      Appcolor.bluecolor3,
+                    ])),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style:
+                      ElevatedButton.styleFrom(shadowColor: Colors.transparent),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      widget.itemdetails.website.contains('facebook')
+                          ? const Icon(
+                              LineIcons.facebook,
+                              size: 20,
+                              color: Colors.white,
+                            )
+                          : const Icon(
+                              LineIcons.globe,
+                              size: 20,
+                              color: Colors.white,
+                            ),
+                      widget.itemdetails.website.contains('facebook')
+                          ? const Text(
+                              '\t\tVisit Facebook',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
+                            )
+                          : const Text(
+                              '\t\tVisit Website',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
+                            ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          )
         ],
       )),
     );
