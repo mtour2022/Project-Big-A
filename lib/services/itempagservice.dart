@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:projectbiga/models/smalllistmodel.dart';
 
 import '../models/mediumlistmodel.dart';
 import '../models/largelistmodel.dart';
@@ -81,6 +82,26 @@ class ItemPageService extends ChangeNotifier {
       MediumListModel itemaccom = MediumListModel.fromJson(getitem);
 
       _activitieslist.add(itemaccom);
+    });
+  }
+
+  List<SmallListModel> _travelagencylist = [];
+
+  List<SmallListModel> getTravelAgencyItems() {
+    return _travelagencylist;
+  }
+
+  Future<void> getTravelAgencyCollectionFromFirebase() async {
+    var _firestoreInstance = FirebaseFirestore.instance;
+    QuerySnapshot qn =
+        await _firestoreInstance.collection('travelagencies').get();
+
+    var data = qn.docs.forEach((element) {
+      var itemdata = element.data() as Map;
+      var getitem = itemdata as Map<String, dynamic>;
+      SmallListModel itemaccom = SmallListModel.fromJson(getitem);
+
+      _travelagencylist.add(itemaccom);
     });
   }
 }

@@ -25,8 +25,12 @@ class SplashPage extends StatelessWidget {
         itemService.getRestaurantCollectionFromFirebase().whenComplete(() {
           itemService.getAttractionCollectionFromFirebase().whenComplete(() {
             itemService.getActivityCollectionFromFirebase().whenComplete(() {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/mainpage', (Route<dynamic> route) => false);
+              itemService
+                  .getTravelAgencyCollectionFromFirebase()
+                  .whenComplete(() {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/mainpage', (Route<dynamic> route) => false);
+              });
             });
           });
         });
