@@ -6,7 +6,7 @@ import 'package:projectbiga/services/itempagservice.dart';
 import 'package:provider/provider.dart';
 
 import '../models/appcolor.dart';
-import 'detailspage.dart';
+import 'largedetailspage.dart';
 
 class AttractionsItemsPage extends StatefulWidget {
   const AttractionsItemsPage({super.key});
