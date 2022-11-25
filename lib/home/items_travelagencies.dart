@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:projectbiga/models/mediumlistmodel.dart';
 import 'package:projectbiga/models/largelistmodel.dart';
 import 'package:projectbiga/models/smalllistmodel.dart';
 import 'package:projectbiga/services/itempagservice.dart';

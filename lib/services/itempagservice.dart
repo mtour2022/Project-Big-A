@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:projectbiga/models/smalllistmodel.dart';
 
-import '../models/mediumlistmodel.dart';
 import '../models/largelistmodel.dart';
 
 class ItemPageService extends ChangeNotifier {
@@ -66,9 +65,9 @@ class ItemPageService extends ChangeNotifier {
     });
   }
 
-  List<MediumListModel> _activitieslist = [];
+  List<LargeListModel> _activitieslist = [];
 
-  List<MediumListModel> getActivityItems() {
+  List<LargeListModel> getActivityItems() {
     return _activitieslist;
   }
 
@@ -79,7 +78,7 @@ class ItemPageService extends ChangeNotifier {
     var data = qn.docs.forEach((element) {
       var itemdata = element.data() as Map;
       var getitem = itemdata as Map<String, dynamic>;
-      MediumListModel itemaccom = MediumListModel.fromJson(getitem);
+      LargeListModel itemaccom = LargeListModel.fromJson(getitem);
 
       _activitieslist.add(itemaccom);
     });
