@@ -8,21 +8,20 @@ import 'package:provider/provider.dart';
 
 import '../models/appcolor.dart';
 
-class TravelAgenciesItemsPage extends StatefulWidget {
-  const TravelAgenciesItemsPage({super.key});
+class TourGuidesItemsPage extends StatefulWidget {
+  const TourGuidesItemsPage({super.key});
 
   @override
-  State<TravelAgenciesItemsPage> createState() =>
-      _TravelAgenciesItemsPageState();
+  State<TourGuidesItemsPage> createState() => _TourGuidesItemsPageState();
 }
 
-class _TravelAgenciesItemsPageState extends State<TravelAgenciesItemsPage> {
+class _TourGuidesItemsPageState extends State<TourGuidesItemsPage> {
   @override
   Widget build(BuildContext context) {
     ItemPageService itemdata =
         Provider.of<ItemPageService>(context, listen: false);
 
-    List<SmallListModel> itemlist = itemdata.getTravelAgencyItems();
+    List<SmallListModel> itemlist = itemdata.getTourGuideItems();
 
     return SafeArea(
       child: Scaffold(
@@ -62,7 +61,7 @@ class _TravelAgenciesItemsPageState extends State<TravelAgenciesItemsPage> {
                                   itemlist[index].image1 == "none"
                                       ? ClipOval(
                                           child: Image.network(
-                                          "https://firebasestorage.googleapis.com/v0/b/project-big-a-16ca5.appspot.com/o/travelagencies%2Fbitatoa%2F241475636_103152655457385_4861490842169169119_n.jpg?alt=media&token=e84ea1f2-fcfe-4acb-9f8c-9106ba287287",
+                                          "https://firebasestorage.googleapis.com/v0/b/project-big-a-16ca5.appspot.com/o/tourguides%2Fmaltoa%2F302035363_103637019149767_4017422460466057100_n.jpg?alt=media&token=023ef776-403e-4880-89cd-03da0558bc5a",
                                           height: 50,
                                           width: 50,
                                           fit: BoxFit.cover,
@@ -76,7 +75,17 @@ class _TravelAgenciesItemsPageState extends State<TravelAgenciesItemsPage> {
                                         )),
                                   const SizedBox(
                                     width: 5,
-                                  )
+                                  ),
+
+                                  /*IconButton(
+                                    icon: itemlist[index]
+                                            .website
+                                            .contains('facebook')
+                                        ? const Icon(LineIcons.facebook)
+                                        : const Icon(LineIcons.globe),
+                                    iconSize: 30,
+                                    onPressed: () {},
+                                  )*/
                                 ],
                               ),
                             ),

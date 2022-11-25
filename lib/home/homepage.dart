@@ -268,11 +268,16 @@ class _HomePageState extends State<HomePage> {
                                   iconval: LineIcons.plane,
                                   context: context),
                             ),
-                            buildCardWidget(
-                                imagelink: 'tourguides.png',
-                                title: 'Accredited\nTour Guides',
-                                iconval: LineIcons.flag,
-                                context: context),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushNamed('/tourguides');
+                              },
+                              child: buildCardWidget(
+                                  imagelink: 'tourguides.png',
+                                  title: 'Accredited\nTour Guides',
+                                  iconval: LineIcons.flag,
+                                  context: context),
+                            ),
                           ],
                         ),
                       ),

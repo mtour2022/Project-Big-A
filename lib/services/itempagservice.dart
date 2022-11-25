@@ -103,4 +103,23 @@ class ItemPageService extends ChangeNotifier {
       _travelagencylist.add(itemaccom);
     });
   }
+
+  List<SmallListModel> _tourguidelist = [];
+
+  List<SmallListModel> getTourGuideItems() {
+    return _tourguidelist;
+  }
+
+  Future<void> getTourGuidesCollectionFromFirebase() async {
+    var _firestoreInstance = FirebaseFirestore.instance;
+    QuerySnapshot qn = await _firestoreInstance.collection('tourguides').get();
+
+    var data = qn.docs.forEach((element) {
+      var itemdata = element.data() as Map;
+      var getitem = itemdata as Map<String, dynamic>;
+      SmallListModel itemaccom = SmallListModel.fromJson(getitem);
+
+      _tourguidelist.add(itemaccom);
+    });
+  }
 }

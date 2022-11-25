@@ -13,6 +13,7 @@ import 'package:projectbiga/services/itempagservice.dart';
 import 'package:provider/provider.dart';
 
 import 'home/items_activities.dart';
+import 'home/items_tourguides.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
               '/attractions': (context) => const AttractionsItemsPage(),
               '/activities': (context) => const ActivitiesItemsPage(),
               '/travelagencies': (context) => const TravelAgenciesItemsPage(),
+              '/tourguides': (context) => const TourGuidesItemsPage(),
             }),
       ),
     );

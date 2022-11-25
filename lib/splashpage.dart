@@ -28,8 +28,12 @@ class SplashPage extends StatelessWidget {
               itemService
                   .getTravelAgencyCollectionFromFirebase()
                   .whenComplete(() {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/mainpage', (Route<dynamic> route) => false);
+                itemService
+                    .getTourGuidesCollectionFromFirebase()
+                    .whenComplete(() {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/mainpage', (Route<dynamic> route) => false);
+                });
               });
             });
           });
