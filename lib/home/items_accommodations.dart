@@ -22,7 +22,7 @@ class _AccommodationsItemsPageState extends State<AccommodationsItemsPage> {
     ItemPageService itemdata =
         Provider.of<ItemPageService>(context, listen: false);
 
-    List<LargeListModel> itemlist = itemdata.getAccommodationItems();
+    List<LargeListModel> itemlist = itemdata.getaccommodations();
 
     return SafeArea(
       child: Scaffold(

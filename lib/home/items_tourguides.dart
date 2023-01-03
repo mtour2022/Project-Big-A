@@ -21,7 +21,7 @@ class _TourGuidesItemsPageState extends State<TourGuidesItemsPage> {
     ItemPageService itemdata =
         Provider.of<ItemPageService>(context, listen: false);
 
-    List<SmallListModel> itemlist = itemdata.getTourGuideItems();
+    List<SmallListModel> itemlist = itemdata.gettourguides();
 
     return SafeArea(
       child: Scaffold(

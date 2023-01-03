@@ -1,28 +1,76 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:projectbiga/home/smalldetailspage.dart';
 import 'package:projectbiga/models/largelistmodel.dart';
+import 'package:projectbiga/models/smalllistmodel.dart';
 import 'package:projectbiga/services/itempagservice.dart';
 import 'package:provider/provider.dart';
-
+import 'package:line_icons/line_icons.dart';
 import '../models/appcolor.dart';
 import 'largedetailspage.dart';
 
-class AttractionsItemsPage extends StatefulWidget {
-  const AttractionsItemsPage({super.key});
+class ListPage extends StatefulWidget {
+  String selectedCategory;
+  //IconData iconval;
+  ListPage({required this.selectedCategory, super.key});
 
   @override
-  State<AttractionsItemsPage> createState() => _AttractionsItemsPageState();
+  State<ListPage> createState() => _ListPageState();
 }
 
-class _AttractionsItemsPageState extends State<AttractionsItemsPage> {
-  @override
-  Widget build(BuildContext context) {
+class _ListPageState extends State<ListPage> {
+  List<LargeListModel> largeitemlist = [];
+  List<SmallListModel> smallitemlist = [];
+
+  fetchLargeData() async {
     ItemPageService itemdata =
         Provider.of<ItemPageService>(context, listen: false);
+    if (widget.selectedCategory == "accommodations") {
+      largeitemlist = itemdata.getaccommodations();
+    } else if (widget.selectedCategory == "restaurants") {
+      largeitemlist = itemdata.getrestaurants();
+    } else if (widget.selectedCategory == "attractions") {
+      largeitemlist = itemdata.getattractions();
+    } else if (widget.selectedCategory == "activities") {
+      largeitemlist = itemdata.getactivities();
+    } else {
+      return;
+    }
+  }
 
-    List<LargeListModel> itemlist = itemdata.getattractions();
+  fetchSmallData() async {
+    ItemPageService itemdata =
+        Provider.of<ItemPageService>(context, listen: false);
+    if (widget.selectedCategory == "travelagencies") {
+      smallitemlist = itemdata.gettravelagencies();
+    } else if (widget.selectedCategory == "tourguides") {
+      smallitemlist = itemdata.gettourguides();
+    } else {
+      return;
+    }
+  }
 
+  @override
+  void initState() {
+    if (widget.selectedCategory == 'accommodations') {
+      fetchLargeData();
+    } else if (widget.selectedCategory == "restaurants") {
+      fetchLargeData();
+    } else if (widget.selectedCategory == "attractions") {
+      fetchLargeData();
+    } else if (widget.selectedCategory == "activities") {
+      fetchLargeData();
+    } else if (widget.selectedCategory == "travelagencies") {
+      fetchSmallData();
+    } else if (widget.selectedCategory == "tourguides") {
+      fetchSmallData();
+    }
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
           body: Stack(
@@ -34,47 +82,67 @@ class _AttractionsItemsPageState extends State<AttractionsItemsPage> {
               ),
               Expanded(
                 child: GridView.count(
-                    padding: const EdgeInsets.all(10),
+                    padding: EdgeInsets.all(10),
                     shrinkWrap: true,
                     childAspectRatio: 0.8,
                     crossAxisCount: 2,
-                    children: List.generate(itemlist.length, (index) {
+                    children: List.generate(
+                        largeitemlist.isNotEmpty
+                            ? largeitemlist.length
+                            : smallitemlist.length, (index) {
                       return GestureDetector(
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LargeDetailsPage(
-                                        itemdetails: itemlist[index],
-                                      )),
+                                  builder: (context) => largeitemlist.isNotEmpty
+                                      ? LargeDetailsPage(
+                                          itemdetails: largeitemlist[index],
+                                        )
+                                      : SmallDetailsPage(
+                                          itemdetails: smallitemlist[index],
+                                        )),
                             );
                           },
                           //user physicalmodel to add shadow in a combined widgets
                           child: Center(
-                            child: Stack(
-                              children: [
-                                Container(
-                                  height: 200,
-                                  width: MediaQuery.of(context).size.width / 2 -
-                                      35,
-                                  color: Colors.white,
-                                  child: Center(
-                                    child: LoadingAnimationWidget.bouncingBall(
-                                      color: Appcolor.bluecolor1,
-                                      // leftDotColor: const Color(0xFF1A1A3F),
-                                      //rightDotColor: const Color(0xFFEA3799),
-                                      size: 25,
+                            child: Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    height: 200,
+                                    width:
+                                        MediaQuery.of(context).size.width / 2 -
+                                            35,
+                                    color: Colors.white,
+                                    child: Center(
+                                      child:
+                                          LoadingAnimationWidget.bouncingBall(
+                                        color: Appcolor.bluecolor1,
+                                        // leftDotColor: const Color(0xFF1A1A3F),
+                                        //rightDotColor: const Color(0xFFEA3799),
+                                        size: 25,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                buildCardWidget(
-                                    title: itemlist[index].name,
-                                    imagelink: itemlist[index].image1,
-                                    classval: itemlist[index].classval,
-                                    address: itemlist[index].address,
-                                    iconval: LineIcons.binoculars,
-                                    context: context),
-                              ],
+                                  buildCardWidget(
+                                      title: largeitemlist.isNotEmpty
+                                          ? largeitemlist[index].name
+                                          : smallitemlist[index].name,
+                                      imagelink: largeitemlist.isNotEmpty
+                                          ? largeitemlist[index].image1
+                                          : smallitemlist[index].image1,
+                                      classval: largeitemlist.isNotEmpty
+                                          ? largeitemlist[index].classval
+                                          : "",
+                                      address: largeitemlist.isNotEmpty
+                                          ? largeitemlist[index].name
+                                          : smallitemlist[index].address,
+                                      //iconval: widget.iconval,
+                                      context: context),
+                                ],
+                              ),
                             ),
                           ));
                     })),
@@ -111,7 +179,7 @@ class _AttractionsItemsPageState extends State<AttractionsItemsPage> {
       required String title,
       required String address,
       required String classval,
-      required IconData iconval,
+      //required IconData iconval,
       context}) {
     return Stack(
       children: [
@@ -191,7 +259,7 @@ class _AttractionsItemsPageState extends State<AttractionsItemsPage> {
             ],
           ),
         ),
-        Positioned(
+        /*Positioned(
           top: 10,
           right: 10,
           child: Icon(
@@ -202,7 +270,7 @@ class _AttractionsItemsPageState extends State<AttractionsItemsPage> {
               Shadow(color: Colors.black, blurRadius: 15.0)
             ],
           ),
-        ),
+        ),*/
       ],
     );
   }

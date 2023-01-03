@@ -9,7 +9,7 @@ class ItemPageService extends ChangeNotifier {
 
   List<LargeListModel> _accommodationlist = [];
 
-  List<LargeListModel> getAccommodationItems() {
+  List<LargeListModel> getaccommodations() {
     return _accommodationlist;
   }
 
@@ -29,7 +29,7 @@ class ItemPageService extends ChangeNotifier {
 
   List<LargeListModel> _restaurantlist = [];
 
-  List<LargeListModel> getRestaurantItems() {
+  List<LargeListModel> getrestaurants() {
     return _restaurantlist;
   }
 
@@ -48,7 +48,7 @@ class ItemPageService extends ChangeNotifier {
 
   List<LargeListModel> _attractionlist = [];
 
-  List<LargeListModel> getAttractionItems() {
+  List<LargeListModel> getattractions() {
     return _attractionlist;
   }
 
@@ -67,7 +67,7 @@ class ItemPageService extends ChangeNotifier {
 
   List<LargeListModel> _activitieslist = [];
 
-  List<LargeListModel> getActivityItems() {
+  List<LargeListModel> getactivities() {
     return _activitieslist;
   }
 
@@ -86,7 +86,7 @@ class ItemPageService extends ChangeNotifier {
 
   List<SmallListModel> _travelagencylist = [];
 
-  List<SmallListModel> getTravelAgencyItems() {
+  List<SmallListModel> gettravelagencies() {
     return _travelagencylist;
   }
 
@@ -106,7 +106,7 @@ class ItemPageService extends ChangeNotifier {
 
   List<SmallListModel> _tourguidelist = [];
 
-  List<SmallListModel> getTourGuideItems() {
+  List<SmallListModel> gettourguides() {
     return _tourguidelist;
   }
 

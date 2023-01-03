@@ -21,7 +21,7 @@ class _ActivitiesItemsPageState extends State<ActivitiesItemsPage> {
     ItemPageService itemdata =
         Provider.of<ItemPageService>(context, listen: false);
 
-    List<LargeListModel> itemlist = itemdata.getActivityItems();
+    List<LargeListModel> itemlist = itemdata.getactivities();
 
     return SafeArea(
       child: Scaffold(

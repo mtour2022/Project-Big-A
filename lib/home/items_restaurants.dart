@@ -21,7 +21,7 @@ class _RestaurantsItemsPageState extends State<RestaurantsItemsPage> {
     ItemPageService itemdata =
         Provider.of<ItemPageService>(context, listen: false);
 
-    List<LargeListModel> itemlist = itemdata.getRestaurantItems();
+    List<LargeListModel> itemlist = itemdata.getrestaurants();
 
     return SafeArea(
       child: Scaffold(

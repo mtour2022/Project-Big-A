@@ -22,7 +22,7 @@ class _TravelAgenciesItemsPageState extends State<TravelAgenciesItemsPage> {
     ItemPageService itemdata =
         Provider.of<ItemPageService>(context, listen: false);
 
-    List<SmallListModel> itemlist = itemdata.getTravelAgencyItems();
+    List<SmallListModel> itemlist = itemdata.gettravelagencies();
 
     return SafeArea(
       child: Scaffold(

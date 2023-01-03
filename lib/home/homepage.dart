@@ -6,6 +6,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shimmer/shimmer.dart';
 import '../models/appcolor.dart';
+import 'listpage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -36,8 +37,51 @@ class _HomePageState extends State<HomePage> {
       style: optionStyle,
     ),
   ];
+
   var _dotPosition = 0;
   List<String> _promotionImages = [];
+  late IconData iconval;
+  List<Map<dynamic, dynamic>> largebuttonlist = [
+    ({
+      "title": "Accredited Accommodation",
+      "dataref": "accommodations",
+      "imgname": "accommodations.png",
+      "icnname": LineIcons.bed
+    }),
+    ({
+      "title": "Accredited Restaurants",
+      "dataref": "restaurants",
+      "imgname": "restaurants.png",
+      "icnname": LineIcons.utensils
+    }),
+    ({
+      "title": "Attractions to See",
+      "dataref": "attractions",
+      "imgname": "attractions.png",
+      "icnname": LineIcons.binoculars
+    }),
+    ({
+      "title": "Activities to Experience",
+      "dataref": "activities",
+      "imgname": "activities.png",
+      "icnname": LineIcons.swimmer
+    }),
+  ];
+
+  List<Map<dynamic, dynamic>> smallbuttonlist = [
+    ({
+      "title": "Accredited Travel Agencies",
+      "dataref": "travelagencies",
+      "imgname": "travelagencies.png",
+      "icnname": LineIcons.plane
+    }),
+    ({
+      "title": "Accredited Tour Guides",
+      "dataref": "tourguides",
+      "imgname": "tourguides.png",
+      "icnname": LineIcons.flag
+    }),
+  ];
 
   //fetch promotional data from firebase
   fetchPromotionImages() async {
@@ -187,9 +231,196 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       const SizedBox(
-                        height: 25,
+                        height: 15,
                       ),
-                      Padding(
+                      GridView.count(
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: EdgeInsets.all(10),
+                        shrinkWrap: true,
+                        childAspectRatio: 0.8,
+                        crossAxisCount: 2,
+                        children:
+                            List.generate(largebuttonlist.length, (index) {
+                          return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ListPage(
+                                            selectedCategory:
+                                                largebuttonlist[index]
+                                                    ['dataref'],
+                                            /* iconval: largebuttonlist[index]
+                                              ['iconval'],*/
+                                          )),
+                                );
+                              },
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5),
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        height: 200,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                    2 -
+                                                35,
+                                        color: Colors.white,
+                                        child: Center(
+                                          child: LoadingAnimationWidget
+                                              .bouncingBall(
+                                            color: Appcolor.bluecolor1,
+                                            // leftDotColor: const Color(0xFF1A1A3F),
+                                            //rightDotColor: const Color(0xFFEA3799),
+                                            size: 25,
+                                          ),
+                                        ),
+                                      ),
+                                      buildCardWidget(
+                                          imagelink:
+                                              '${largebuttonlist[index]["imgname"]}',
+                                          title:
+                                              '${largebuttonlist[index]["title"]}',
+                                          //iconval: largebuttonlist[index]["icnname"],
+                                          context: context),
+                                    ],
+                                  ),
+                                ),
+                              ));
+                        }),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 30),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text("Travel Needs",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  color: Appcolor.grey3,
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w800)),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      GridView.count(
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: EdgeInsets.all(10),
+                        shrinkWrap: true,
+                        childAspectRatio: 0.8,
+                        crossAxisCount: 2,
+                        children:
+                            List.generate(smallbuttonlist.length, (index) {
+                          return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ListPage(
+                                            selectedCategory:
+                                                smallbuttonlist[index]
+                                                    ['dataref'],
+                                            /* iconval: largebuttonlist[index]
+                                              ['iconval'],*/
+                                          )),
+                                );
+                              },
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5),
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        height: 200,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                    2 -
+                                                35,
+                                        color: Colors.white,
+                                        child: Center(
+                                          child: LoadingAnimationWidget
+                                              .bouncingBall(
+                                            color: Appcolor.bluecolor1,
+                                            // leftDotColor: const Color(0xFF1A1A3F),
+                                            //rightDotColor: const Color(0xFFEA3799),
+                                            size: 25,
+                                          ),
+                                        ),
+                                      ),
+                                      buildCardWidget(
+                                          imagelink:
+                                              '${smallbuttonlist[index]["imgname"]}',
+                                          title:
+                                              '${smallbuttonlist[index]["title"]}',
+                                          //iconval: largebuttonlist[index]["icnname"],
+                                          context: context),
+                                    ],
+                                  ),
+                                ),
+                              ));
+                        }),
+                      ),
+
+                      /* Expanded(
+                        child: ListView.builder(
+                            itemCount: largebuttonlist.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ListPage(
+                                              selectedCategory:
+                                                  largebuttonlist[index]
+                                                      ['dataref'],
+                                              iconval: largebuttonlist[index]
+                                                  ['iconval'],
+                                            )),
+                                  );
+                                },
+                                child: buildCardWidget(
+                                    imagelink:
+                                        '${largebuttonlist[index]["imgname"]}',
+                                    title: '${largebuttonlist[index]["title"]}',
+                                    iconval: largebuttonlist[index]["icnname"],
+                                    context: context),
+                              );
+                            }),
+                      ),*/
+                      /* Expanded(
+                        child: ListView.builder(
+                            itemCount: smallbuttonlist.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ListPage(
+                                              selectedCategory:
+                                                  smallbuttonlist[index]
+                                                      ['dataref'],
+                                              iconval: largebuttonlist[index]
+                                                  ['iconval'],
+                                            )),
+                                  );
+                                },
+                                child: buildCardWidget(
+                                    imagelink:
+                                        '${smallbuttonlist[index]["imgname"]}',
+                                    title: '${smallbuttonlist[index]["title"]}',
+                                    iconval: smallbuttonlist[index]["icnname"],
+                                    context: context),
+                              );
+                            }),
+                      ),*/
+                      /* Padding(
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -281,6 +512,7 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                       ),
+                      */
                       const SizedBox(
                         height: 50,
                       ),
@@ -297,7 +529,7 @@ class _HomePageState extends State<HomePage> {
 Widget buildCardWidget(
     {required String imagelink,
     required String title,
-    required IconData iconval,
+    // required IconData iconval,
     context}) {
   return Stack(
     children: [
@@ -345,7 +577,7 @@ Widget buildCardWidget(
           ],
         ),
       ),
-      Positioned(
+      /* Positioned(
         top: 10,
         right: 10,
         child: Icon(
@@ -356,7 +588,7 @@ Widget buildCardWidget(
             Shadow(color: Colors.black, blurRadius: 15.0)
           ],
         ),
-      ),
+      ),*/
     ],
   );
 }

@@ -1,9 +1,15 @@
+import 'dart:math';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:latlng/latlng.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:map/map.dart';
+import 'package:map_launcher/map_launcher.dart';
 
 import 'package:projectbiga/models/largelistmodel.dart';
 import 'package:projectbiga/models/smalllistmodel.dart';
@@ -25,16 +31,77 @@ class LargeDetailsPage extends StatefulWidget {
 class _LargeDetailsPageState extends State<LargeDetailsPage> {
   late List<String> listitem = <String>[];
   var _dotPosition = 0;
+  late LatLng latlongval;
+
+  late LatLng destinationlatlong;
   @override
   void initState() {
+    destinationlatlong = LatLng(double.parse(widget.itemdetails.lat),
+        double.parse(widget.itemdetails.long));
     listitem.add(widget.itemdetails.image1);
     listitem.add(widget.itemdetails.image2);
     listitem.add(widget.itemdetails.image3);
+    latlongval = LatLng(double.parse(widget.itemdetails.lat),
+        double.parse(widget.itemdetails.long));
+
     super.initState();
   }
 
+  openMapsSheet(context) async {
+    try {
+      final coords =
+          Coords(destinationlatlong.latitude, destinationlatlong.longitude);
+      final title = "Ocean Beach";
+      final availableMaps = await MapLauncher.installedMaps;
+
+      showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return SafeArea(
+            child: SingleChildScrollView(
+              child: Container(
+                child: Wrap(
+                  children: <Widget>[
+                    for (var map in availableMaps)
+                      ListTile(
+                        onTap: () => map.showMarker(
+                          coords: coords,
+                          title: title,
+                        ),
+                        title: Text(map.mapName),
+                        leading: const Icon(
+                          LineIcons.locationArrow,
+                          size: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  /*getavailablemaps() async {
+    final availableMaps = await MapLauncher.installedMaps;
+
+    await availableMaps.first.showMarker(
+      coords: Coords(destinationlatlong.latitude, destinationlatlong.longitude),
+      title: "Ocean Beach",
+    );
+  }*/
+
   @override
   Widget build(BuildContext context) {
+    final controllerl = MapController(
+      location: latlongval,
+      zoom: 15,
+    );
     return SafeArea(
       child: Scaffold(
           body: Stack(
@@ -152,16 +219,6 @@ class _LargeDetailsPageState extends State<LargeDetailsPage> {
                         const SizedBox(
                           height: 15,
                         ),
-                        Text(
-                          "${widget.itemdetails.address}",
-                          style: const TextStyle(
-                            color: Appcolor.bluecolor1,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
                         ExpandableText(
                           widget.itemdetails.description,
                           expandText: 'show more',
@@ -181,6 +238,73 @@ class _LargeDetailsPageState extends State<LargeDetailsPage> {
                             fontSize: 14,
                           ),
                         ),*/
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          "${widget.itemdetails.address}",
+                          style: const TextStyle(
+                            color: Appcolor.bluecolor1,
+                            fontSize: 14,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        Stack(
+                          children: [
+                            SizedBox(
+                              height: 300,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: MapLayout(
+                                  controller: controllerl,
+                                  builder: (context, transformer) {
+                                    return TileLayer(
+                                      builder: (context, x, y, z) {
+                                        final tilesInZoom = pow(2.0, z).floor();
+
+                                        while (x < 0) {
+                                          x += tilesInZoom;
+                                        }
+                                        while (y < 0) {
+                                          y += tilesInZoom;
+                                        }
+
+                                        x %= tilesInZoom;
+                                        y %= tilesInZoom;
+
+                                        //Google Maps
+                                        final url =
+                                            'https://www.google.com/maps/vt/pb=!1m4!1m3!1i$z!2i$x!3i$y!2m3!1e0!2sm!3i420120488!3m7!2sen!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!1e0!23i4111425';
+
+                                        return CachedNetworkImage(
+                                          imageUrl: url,
+                                          fit: BoxFit.cover,
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                            Positioned.fill(
+                                child: Align(
+                                    alignment: Alignment.center,
+                                    child: PhysicalModel(
+                                      color: Colors.transparent,
+                                      elevation: 10,
+                                      shadowColor:
+                                          Colors.black.withOpacity(0.8),
+                                      borderRadius: BorderRadius.circular(100),
+                                      child: const Icon(
+                                        Icons.location_on_rounded,
+                                        size: 35,
+                                        color: Colors.white,
+                                      ),
+                                    ))),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -222,7 +346,9 @@ class _LargeDetailsPageState extends State<LargeDetailsPage> {
                         Appcolor.bluecolor3,
                       ])),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      openMapsSheet(context);
+                    },
                     style: ElevatedButton.styleFrom(
                         shadowColor: Colors.transparent),
                     child: Row(

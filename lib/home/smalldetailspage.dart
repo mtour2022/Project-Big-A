@@ -14,7 +14,7 @@ import 'package:shimmer/shimmer.dart';
 import '../models/appcolor.dart';
 
 class SmallDetailsPage extends StatefulWidget {
-  LargeListModel itemdetails;
+  SmallListModel itemdetails;
   SmallDetailsPage({required this.itemdetails, super.key});
 
   @override
@@ -26,9 +26,9 @@ class _SmallDetailsPageState extends State<SmallDetailsPage> {
   var _dotPosition = 0;
   @override
   void initState() {
-    listitem.add(widget.itemdetails.image1);
+    /*listitem.add(widget.itemdetails.image1);
     listitem.add(widget.itemdetails.image2);
-    listitem.add(widget.itemdetails.image3);
+    listitem.add(widget.itemdetails.image3);*/
     super.initState();
   }
 
@@ -141,13 +141,6 @@ class _SmallDetailsPageState extends State<SmallDetailsPage> {
                         const SizedBox(
                           height: 15,
                         ),
-                        Text(
-                          "${widget.itemdetails.classval}",
-                          style: const TextStyle(
-                            color: Appcolor.bluecolor1,
-                            fontSize: 14,
-                          ),
-                        ),
                         const SizedBox(
                           height: 15,
                         ),
@@ -161,18 +154,7 @@ class _SmallDetailsPageState extends State<SmallDetailsPage> {
                         const SizedBox(
                           height: 15,
                         ),
-                        ExpandableText(
-                          widget.itemdetails.description,
-                          expandText: 'show more',
-                          collapseText: 'show less',
-                          maxLines: 4,
-                          linkColor: Appcolor.bluecolor1,
-                          textAlign: TextAlign.justify,
-                          style: const TextStyle(
-                              fontSize: 14,
-                              color: Appcolor.grey2,
-                              fontWeight: FontWeight.normal),
-                        ),
+
                         /* Text(
                           widget.itemdetails.description,
                           style: const TextStyle(
