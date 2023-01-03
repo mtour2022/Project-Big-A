@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:projectbiga/models/largelistmodel.dart';
 
-import 'package:projectbiga/models/datamodel.dart';
-
 class FetchDataService extends ChangeNotifier {
   late LargeListModel _fetcheddataaccommodation;
 

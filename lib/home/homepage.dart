@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../models/appcolor.dart';
 import 'listpage.dart';
 
@@ -19,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
+
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Home',
@@ -277,13 +280,91 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                         ),
                                       ),
-                                      buildCardWidget(
+                                      Stack(
+                                        children: [
+                                          Container(
+                                            height: 200,
+                                            width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2 -
+                                                35,
+                                            decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                    image: AssetImage(
+                                                        'assets/images/${largebuttonlist[index]["imgname"]}'),
+                                                    fit: BoxFit.cover),
+                                                color: Colors.black,
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                          ),
+                                          Positioned.fill(
+                                            child: Container(
+                                              height: 200,
+                                              width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      2 -
+                                                  35,
+                                              decoration: BoxDecoration(
+                                                  gradient:
+                                                      const LinearGradient(
+                                                    begin: Alignment.topCenter,
+                                                    end: Alignment.bottomCenter,
+                                                    colors: [
+                                                      Colors.transparent,
+                                                      Colors.transparent,
+                                                      Colors.transparent,
+                                                      Appcolor.grey3,
+                                                    ],
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            bottom: 10,
+                                            left: 10,
+                                            right: 10,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                    "${largebuttonlist[index]["title"]}",
+                                                    textAlign: TextAlign.start,
+                                                    style: const TextStyle(
+                                                        color:
+                                                            Appcolor.background,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w700)),
+                                              ],
+                                            ),
+                                          ),
+                                          Positioned(
+                                            top: 10,
+                                            right: 10,
+                                            child: Icon(
+                                              largebuttonlist[index]["icnname"],
+                                              color: Colors.white,
+                                              size: 20,
+                                              shadows: const <Shadow>[
+                                                Shadow(
+                                                    color: Colors.black,
+                                                    blurRadius: 15.0)
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      /*buildCardWidget(
                                           imagelink:
                                               '${largebuttonlist[index]["imgname"]}',
                                           title:
                                               '${largebuttonlist[index]["title"]}',
                                           //iconval: largebuttonlist[index]["icnname"],
-                                          context: context),
+                                          context: context),*/
                                     ],
                                   ),
                                 ),
@@ -352,13 +433,84 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                         ),
                                       ),
-                                      buildCardWidget(
-                                          imagelink:
-                                              '${smallbuttonlist[index]["imgname"]}',
-                                          title:
-                                              '${smallbuttonlist[index]["title"]}',
-                                          //iconval: largebuttonlist[index]["icnname"],
-                                          context: context),
+                                      Stack(
+                                        children: [
+                                          Container(
+                                            height: 200,
+                                            width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2 -
+                                                35,
+                                            decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                    image: AssetImage(
+                                                        'assets/images/${smallbuttonlist[index]["imgname"]}'),
+                                                    fit: BoxFit.cover),
+                                                color: Colors.black,
+                                                borderRadius:
+                                                    BorderRadius.circular(5)),
+                                          ),
+                                          Positioned.fill(
+                                            child: Container(
+                                              height: 200,
+                                              width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      2 -
+                                                  35,
+                                              decoration: BoxDecoration(
+                                                  gradient:
+                                                      const LinearGradient(
+                                                    begin: Alignment.topCenter,
+                                                    end: Alignment.bottomCenter,
+                                                    colors: [
+                                                      Colors.transparent,
+                                                      Colors.transparent,
+                                                      Colors.transparent,
+                                                      Appcolor.grey3,
+                                                    ],
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            bottom: 10,
+                                            left: 10,
+                                            right: 10,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                    "${smallbuttonlist[index]["title"]}",
+                                                    textAlign: TextAlign.start,
+                                                    style: const TextStyle(
+                                                        color:
+                                                            Appcolor.background,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w700)),
+                                              ],
+                                            ),
+                                          ),
+                                          Positioned(
+                                            top: 10,
+                                            right: 10,
+                                            child: Icon(
+                                              smallbuttonlist[index]["icnname"],
+                                              color: Colors.white,
+                                              size: 20,
+                                              shadows: const <Shadow>[
+                                                Shadow(
+                                                    color: Colors.black,
+                                                    blurRadius: 15.0)
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -524,71 +676,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
-
-Widget buildCardWidget(
-    {required String imagelink,
-    required String title,
-    // required IconData iconval,
-    context}) {
-  return Stack(
-    children: [
-      Container(
-        height: 200,
-        width: MediaQuery.of(context).size.width / 2 - 35,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/$imagelink'),
-                fit: BoxFit.cover),
-            color: Colors.black,
-            borderRadius: BorderRadius.circular(5)),
-      ),
-      Positioned.fill(
-        child: Container(
-          height: 200,
-          width: MediaQuery.of(context).size.width / 2 - 35,
-          decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Colors.transparent,
-                  Colors.transparent,
-                  Colors.transparent,
-                  Appcolor.grey3,
-                ],
-              ),
-              borderRadius: BorderRadius.circular(5)),
-        ),
-      ),
-      Positioned(
-        bottom: 10,
-        left: 10,
-        right: 10,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("$title",
-                textAlign: TextAlign.start,
-                style: const TextStyle(
-                    color: Appcolor.background,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700)),
-          ],
-        ),
-      ),
-      /* Positioned(
-        top: 10,
-        right: 10,
-        child: Icon(
-          iconval,
-          color: Colors.white,
-          size: 20,
-          shadows: const <Shadow>[
-            Shadow(color: Colors.black, blurRadius: 15.0)
-          ],
-        ),
-      ),*/
-    ],
-  );
 }

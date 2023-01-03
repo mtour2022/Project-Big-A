@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:projectbiga/home/smalldetailspage.dart';
@@ -7,6 +8,8 @@ import 'package:projectbiga/models/smalllistmodel.dart';
 import 'package:projectbiga/services/itempagservice.dart';
 import 'package:provider/provider.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../models/appcolor.dart';
 import 'largedetailspage.dart';
 
@@ -51,6 +54,12 @@ class _ListPageState extends State<ListPage> {
     }
   }
 
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      throw 'Could not launch link';
+    }
+  }
+
   @override
   void initState() {
     if (widget.selectedCategory == 'accommodations') {
@@ -92,17 +101,17 @@ class _ListPageState extends State<ListPage> {
                             : smallitemlist.length, (index) {
                       return GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => largeitemlist.isNotEmpty
-                                      ? LargeDetailsPage(
-                                          itemdetails: largeitemlist[index],
-                                        )
-                                      : SmallDetailsPage(
-                                          itemdetails: smallitemlist[index],
-                                        )),
-                            );
+                            if (largeitemlist.isNotEmpty) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LargeDetailsPage(
+                                            itemdetails: largeitemlist[index],
+                                          )));
+                            } else {
+                              _launchInBrowser(
+                                  Uri.parse(smallitemlist[index].website));
+                            }
                           },
                           //user physicalmodel to add shadow in a combined widgets
                           child: Center(
@@ -259,18 +268,30 @@ class _ListPageState extends State<ListPage> {
             ],
           ),
         ),
-        /*Positioned(
+        Positioned(
           top: 10,
           right: 10,
           child: Icon(
-            iconval,
+            widget.selectedCategory == "accommodations"
+                ? LineIcons.bed
+                : widget.selectedCategory == "restaurants"
+                    ? LineIcons.utensils
+                    : widget.selectedCategory == "attractions"
+                        ? LineIcons.binoculars
+                        : widget.selectedCategory == "activities"
+                            ? LineIcons.swimmer
+                            : widget.selectedCategory == "travelagencies"
+                                ? LineIcons.plane
+                                : widget.selectedCategory == "tourguides"
+                                    ? LineIcons.flag
+                                    : LineIcons.bed,
             color: Colors.white,
             size: 20,
             shadows: const <Shadow>[
               Shadow(color: Colors.black, blurRadius: 15.0)
             ],
           ),
-        ),*/
+        ),
       ],
     );
   }

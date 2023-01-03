@@ -2,18 +2,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:projectbiga/SplashPage.dart';
-import 'package:projectbiga/home/items_attractions.dart';
-import 'package:projectbiga/home/items_restaurants.dart';
-import 'package:projectbiga/home/items_travelagencies.dart';
+
 import 'package:projectbiga/mainpage.dart';
 import 'package:projectbiga/home/homepage.dart';
 import 'package:projectbiga/home/items_accommodations.dart';
 import 'package:projectbiga/services/getdatamodel.dart';
 import 'package:projectbiga/services/itempagservice.dart';
 import 'package:provider/provider.dart';
-
-import 'home/items_activities.dart';
-import 'home/items_tourguides.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,11 +38,6 @@ class MyApp extends StatelessWidget {
               '/': (context) => SplashPage(),
               '/mainpage': (context) => MainPage(),
               '/accommodations': (context) => const AccommodationsItemsPage(),
-              '/restaurants': (context) => const RestaurantsItemsPage(),
-              '/attractions': (context) => const AttractionsItemsPage(),
-              '/activities': (context) => const ActivitiesItemsPage(),
-              '/travelagencies': (context) => const TravelAgenciesItemsPage(),
-              '/tourguides': (context) => const TourGuidesItemsPage(),
             }),
       ),
     );

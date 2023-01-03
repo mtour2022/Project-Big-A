@@ -17,6 +17,7 @@ import 'package:projectbiga/services/itempagservice.dart';
 import 'package:projectbiga/widgets/topnavigationbar.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../models/appcolor.dart';
 
@@ -34,6 +35,8 @@ class _LargeDetailsPageState extends State<LargeDetailsPage> {
   late LatLng latlongval;
 
   late LatLng destinationlatlong;
+
+  late Uri _url;
   @override
   void initState() {
     destinationlatlong = LatLng(double.parse(widget.itemdetails.lat),
@@ -44,14 +47,22 @@ class _LargeDetailsPageState extends State<LargeDetailsPage> {
     latlongval = LatLng(double.parse(widget.itemdetails.lat),
         double.parse(widget.itemdetails.long));
 
+    _url = Uri.parse(widget.itemdetails.website);
+
     super.initState();
+  }
+
+  Future<void> _launchInBrowser() async {
+    if (!await launchUrl(_url, mode: LaunchMode.externalApplication)) {
+      throw 'Could not launch link';
+    }
   }
 
   openMapsSheet(context) async {
     try {
       final coords =
           Coords(destinationlatlong.latitude, destinationlatlong.longitude);
-      final title = "Ocean Beach";
+      final title = widget.itemdetails.name;
       final availableMaps = await MapLauncher.installedMaps;
 
       showModalBottomSheet(
@@ -241,75 +252,118 @@ class _LargeDetailsPageState extends State<LargeDetailsPage> {
                         const SizedBox(
                           height: 15,
                         ),
-                        Text(
-                          "${widget.itemdetails.address}",
-                          style: const TextStyle(
-                            color: Appcolor.bluecolor1,
-                            fontSize: 14,
+                        Visibility(
+                          visible: widget.itemdetails.address != "none",
+                          child: Text(
+                            "${widget.itemdetails.address}",
+                            style: const TextStyle(
+                              color: Appcolor.bluecolor1,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                         const SizedBox(
                           height: 25,
                         ),
-                        Stack(
-                          children: [
-                            SizedBox(
-                              height: 300,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: MapLayout(
-                                  controller: controllerl,
-                                  builder: (context, transformer) {
-                                    return TileLayer(
-                                      builder: (context, x, y, z) {
-                                        final tilesInZoom = pow(2.0, z).floor();
+                        Visibility(
+                          visible: widget.itemdetails.lat != "0",
+                          child: Stack(
+                            children: [
+                              SizedBox(
+                                height: 300,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: MapLayout(
+                                    controller: controllerl,
+                                    builder: (context, transformer) {
+                                      return TileLayer(
+                                        builder: (context, x, y, z) {
+                                          final tilesInZoom =
+                                              pow(2.0, z).floor();
 
-                                        while (x < 0) {
-                                          x += tilesInZoom;
-                                        }
-                                        while (y < 0) {
-                                          y += tilesInZoom;
-                                        }
+                                          while (x < 0) {
+                                            x += tilesInZoom;
+                                          }
+                                          while (y < 0) {
+                                            y += tilesInZoom;
+                                          }
 
-                                        x %= tilesInZoom;
-                                        y %= tilesInZoom;
+                                          x %= tilesInZoom;
+                                          y %= tilesInZoom;
 
-                                        //Google Maps
-                                        final url =
-                                            'https://www.google.com/maps/vt/pb=!1m4!1m3!1i$z!2i$x!3i$y!2m3!1e0!2sm!3i420120488!3m7!2sen!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!1e0!23i4111425';
+                                          //Google Maps
+                                          final url =
+                                              'https://www.google.com/maps/vt/pb=!1m4!1m3!1i$z!2i$x!3i$y!2m3!1e0!2sm!3i420120488!3m7!2sen!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!1e0!23i4111425';
 
-                                        return CachedNetworkImage(
-                                          imageUrl: url,
-                                          fit: BoxFit.cover,
-                                        );
-                                      },
-                                    );
-                                  },
+                                          return CachedNetworkImage(
+                                            imageUrl: url,
+                                            fit: BoxFit.cover,
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
-                            ),
-                            Positioned.fill(
-                                child: Align(
-                                    alignment: Alignment.center,
-                                    child: PhysicalModel(
-                                      color: Colors.transparent,
-                                      elevation: 10,
+                              Positioned.fill(
+                                  child: Align(
+                                      alignment: Alignment.center,
+                                      child: PhysicalModel(
+                                        color: Colors.transparent,
+                                        elevation: 10,
+                                        shadowColor:
+                                            Colors.black.withOpacity(0.8),
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: const Icon(
+                                          Icons.location_on_rounded,
+                                          size: 35,
+                                          color: Colors.white,
+                                        ),
+                                      ))),
+                              Visibility(
+                                visible: widget.itemdetails.lat != "0",
+                                child: Positioned(
+                                  bottom: 10,
+                                  left: 29,
+                                  right: 29,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      openMapsSheet(context);
+                                    },
+                                    style: ElevatedButton.styleFrom(
                                       shadowColor:
-                                          Colors.black.withOpacity(0.8),
-                                      borderRadius: BorderRadius.circular(100),
-                                      child: const Icon(
-                                        Icons.location_on_rounded,
-                                        size: 35,
-                                        color: Colors.white,
-                                      ),
-                                    ))),
-                          ],
+                                          Colors.black.withOpacity(0.5),
+                                      padding: EdgeInsets.all(15),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: const [
+                                        Icon(
+                                          LineIcons.map,
+                                          size: 20,
+                                          color: Colors.white,
+                                        ),
+                                        Text(
+                                          '\t\tOpen Map',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
                   const SizedBox(
-                    height: 500,
+                    height: 200,
                   ),
                 ],
               ),
@@ -347,7 +401,7 @@ class _LargeDetailsPageState extends State<LargeDetailsPage> {
                       ])),
                   child: ElevatedButton(
                     onPressed: () {
-                      openMapsSheet(context);
+                      _launchInBrowser();
                     },
                     style: ElevatedButton.styleFrom(
                         shadowColor: Colors.transparent),
