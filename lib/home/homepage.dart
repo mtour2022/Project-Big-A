@@ -128,8 +128,6 @@ class _HomePageState extends State<HomePage> {
                                 child: Center(
                                   child: LoadingAnimationWidget.bouncingBall(
                                     color: Appcolor.bluecolor1,
-                                    // leftDotColor: const Color(0xFF1A1A3F),
-                                    //rightDotColor: const Color(0xFFEA3799),
                                     size: 25,
                                   ),
                                 ),
@@ -253,8 +251,6 @@ class _HomePageState extends State<HomePage> {
                                             selectedCategory:
                                                 largebuttonlist[index]
                                                     ['dataref'],
-                                            /* iconval: largebuttonlist[index]
-                                              ['iconval'],*/
                                           )),
                                 );
                               },
@@ -274,8 +270,6 @@ class _HomePageState extends State<HomePage> {
                                           child: LoadingAnimationWidget
                                               .bouncingBall(
                                             color: Appcolor.bluecolor1,
-                                            // leftDotColor: const Color(0xFF1A1A3F),
-                                            //rightDotColor: const Color(0xFFEA3799),
                                             size: 25,
                                           ),
                                         ),
@@ -358,13 +352,6 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                         ],
                                       ),
-                                      /*buildCardWidget(
-                                          imagelink:
-                                              '${largebuttonlist[index]["imgname"]}',
-                                          title:
-                                              '${largebuttonlist[index]["title"]}',
-                                          //iconval: largebuttonlist[index]["icnname"],
-                                          context: context),*/
                                     ],
                                   ),
                                 ),
@@ -406,8 +393,6 @@ class _HomePageState extends State<HomePage> {
                                             selectedCategory:
                                                 smallbuttonlist[index]
                                                     ['dataref'],
-                                            /* iconval: largebuttonlist[index]
-                                              ['iconval'],*/
                                           )),
                                 );
                               },
@@ -427,8 +412,6 @@ class _HomePageState extends State<HomePage> {
                                           child: LoadingAnimationWidget
                                               .bouncingBall(
                                             color: Appcolor.bluecolor1,
-                                            // leftDotColor: const Color(0xFF1A1A3F),
-                                            //rightDotColor: const Color(0xFFEA3799),
                                             size: 25,
                                           ),
                                         ),
@@ -517,154 +500,6 @@ class _HomePageState extends State<HomePage> {
                               ));
                         }),
                       ),
-
-                      /* Expanded(
-                        child: ListView.builder(
-                            itemCount: largebuttonlist.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ListPage(
-                                              selectedCategory:
-                                                  largebuttonlist[index]
-                                                      ['dataref'],
-                                              iconval: largebuttonlist[index]
-                                                  ['iconval'],
-                                            )),
-                                  );
-                                },
-                                child: buildCardWidget(
-                                    imagelink:
-                                        '${largebuttonlist[index]["imgname"]}',
-                                    title: '${largebuttonlist[index]["title"]}',
-                                    iconval: largebuttonlist[index]["icnname"],
-                                    context: context),
-                              );
-                            }),
-                      ),*/
-                      /* Expanded(
-                        child: ListView.builder(
-                            itemCount: smallbuttonlist.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => ListPage(
-                                              selectedCategory:
-                                                  smallbuttonlist[index]
-                                                      ['dataref'],
-                                              iconval: largebuttonlist[index]
-                                                  ['iconval'],
-                                            )),
-                                  );
-                                },
-                                child: buildCardWidget(
-                                    imagelink:
-                                        '${smallbuttonlist[index]["imgname"]}',
-                                    title: '${smallbuttonlist[index]["title"]}',
-                                    iconval: smallbuttonlist[index]["icnname"],
-                                    context: context),
-                              );
-                            }),
-                      ),*/
-                      /* Padding(
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context)
-                                    .pushNamed('/accommodations');
-                              },
-                              child: buildCardWidget(
-                                  imagelink: 'accommodations.png',
-                                  title: 'Accredited\nAccommodations',
-                                  iconval: LineIcons.bed,
-                                  context: context),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pushNamed('/restaurants');
-                              },
-                              child: buildCardWidget(
-                                  imagelink: 'restaurants.png',
-                                  title: 'Accredited\nRestaurants',
-                                  iconval: LineIcons.utensils,
-                                  context: context),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pushNamed('/attractions');
-                              },
-                              child: buildCardWidget(
-                                  imagelink: 'attractions.png',
-                                  title: 'Attractions\nTo See',
-                                  iconval: LineIcons.binoculars,
-                                  context: context),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pushNamed('/activities');
-                              },
-                              child: buildCardWidget(
-                                  imagelink: 'activities.png',
-                                  title: 'Activities\nto Experience',
-                                  iconval: LineIcons.swimmer,
-                                  context: context),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context)
-                                    .pushNamed('/travelagencies');
-                              },
-                              child: buildCardWidget(
-                                  imagelink: 'travelagencies.png',
-                                  title: 'Accredited\nTravel Agencies',
-                                  iconval: LineIcons.plane,
-                                  context: context),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pushNamed('/tourguides');
-                              },
-                              child: buildCardWidget(
-                                  imagelink: 'tourguides.png',
-                                  title: 'Accredited\nTour Guides',
-                                  iconval: LineIcons.flag,
-                                  context: context),
-                            ),
-                          ],
-                        ),
-                      ),
-                      */
                       const SizedBox(
                         height: 50,
                       ),

@@ -98,15 +98,6 @@ class _LargeDetailsPageState extends State<LargeDetailsPage> {
     }
   }
 
-  /*getavailablemaps() async {
-    final availableMaps = await MapLauncher.installedMaps;
-
-    await availableMaps.first.showMarker(
-      coords: Coords(destinationlatlong.latitude, destinationlatlong.longitude),
-      title: "Ocean Beach",
-    );
-  }*/
-
   @override
   Widget build(BuildContext context) {
     final controllerl = MapController(
@@ -132,8 +123,7 @@ class _LargeDetailsPageState extends State<LargeDetailsPage> {
                             child: Center(
                               child: LoadingAnimationWidget.bouncingBall(
                                 color: Appcolor.bluecolor1,
-                                // leftDotColor: const Color(0xFF1A1A3F),
-                                //rightDotColor: const Color(0xFFEA3799),
+                               
                                 size: 25,
                               ),
                             ),
@@ -242,13 +232,7 @@ class _LargeDetailsPageState extends State<LargeDetailsPage> {
                               color: Appcolor.grey2,
                               fontWeight: FontWeight.normal),
                         ),
-                        /* Text(
-                          widget.itemdetails.description,
-                          style: const TextStyle(
-                            color: Appcolor.grey2,
-                            fontSize: 14,
-                          ),
-                        ),*/
+                    
                         const SizedBox(
                           height: 15,
                         ),

@@ -5,7 +5,6 @@ import 'package:projectbiga/SplashPage.dart';
 
 import 'package:projectbiga/mainpage.dart';
 import 'package:projectbiga/home/homepage.dart';
-import 'package:projectbiga/home/items_accommodations.dart';
 import 'package:projectbiga/services/getdatamodel.dart';
 import 'package:projectbiga/services/itempagservice.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +36,6 @@ class MyApp extends StatelessWidget {
             routes: {
               '/': (context) => SplashPage(),
               '/mainpage': (context) => MainPage(),
-              '/accommodations': (context) => const AccommodationsItemsPage(),
             }),
       ),
     );

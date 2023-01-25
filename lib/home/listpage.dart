@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:projectbiga/home/smalldetailspage.dart';
+
 import 'package:projectbiga/models/largelistmodel.dart';
 import 'package:projectbiga/models/smalllistmodel.dart';
 import 'package:projectbiga/services/itempagservice.dart';
@@ -129,8 +129,7 @@ class _ListPageState extends State<ListPage> {
                                       child:
                                           LoadingAnimationWidget.bouncingBall(
                                         color: Appcolor.bluecolor1,
-                                        // leftDotColor: const Color(0xFF1A1A3F),
-                                        //rightDotColor: const Color(0xFFEA3799),
+                                       
                                         size: 25,
                                       ),
                                     ),
@@ -188,7 +187,7 @@ class _ListPageState extends State<ListPage> {
       required String title,
       required String address,
       required String classval,
-      //required IconData iconval,
+   
       context}) {
     return Stack(
       children: [
