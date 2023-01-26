@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 import '../models/appcolor.dart';
 import 'listpage.dart';
 
@@ -18,31 +16,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
-
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Likes',
-      style: optionStyle,
-    ),
-    Text(
-      'Search',
-      style: optionStyle,
-    ),
-    Text(
-      'Profile',
-      style: optionStyle,
-    ),
-  ];
-
   var _dotPosition = 0;
-  List<String> _promotionImages = [];
+  //edit to final
+  final List<String> _promotionImages = [];
   late IconData iconval;
   List<Map<dynamic, dynamic>> largebuttonlist = [
     ({
@@ -88,11 +64,11 @@ class _HomePageState extends State<HomePage> {
 
   //fetch promotional data from firebase
   fetchPromotionImages() async {
-    var _firestoreInstance = FirebaseFirestore.instance;
-    QuerySnapshot qn = await _firestoreInstance.collection('promotions').get();
+    var firestoreInstance = FirebaseFirestore.instance;
+    QuerySnapshot qn = await firestoreInstance.collection('promotions').get();
     for (int i = 0; i < qn.docs.length; i++) {
       _promotionImages.add(qn.docs[i]['imagelink']);
-      print(qn.docs[i]['imagelink']);
+      //print(qn.docs[i]['imagelink']);
     }
   }
 
@@ -176,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                             right: 0,
                             child: Center(
                               child: DotsIndicator(
-                                dotsCount: _promotionImages.length == 0
+                                dotsCount: _promotionImages.isEmpty
                                     ? 1
                                     : _promotionImages.length,
                                 position: _dotPosition.toDouble(),
@@ -236,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       GridView.count(
                         physics: const NeverScrollableScrollPhysics(),
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         shrinkWrap: true,
                         childAspectRatio: 0.8,
                         crossAxisCount: 2,
@@ -378,7 +354,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       GridView.count(
                         physics: const NeverScrollableScrollPhysics(),
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         shrinkWrap: true,
                         childAspectRatio: 0.8,
                         crossAxisCount: 2,
